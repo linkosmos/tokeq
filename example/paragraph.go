@@ -11,7 +11,7 @@ import (
 func main() {
 	response, err := http.Get("https://golang.org/pkg/fmt/")
 	if err != nil {
-		fmt.Errorf("http.Get error: %s", err)
+		fmt.Printf("http.Get error: %s", err)
 		return
 	}
 	toks := tokeq.Toks{
@@ -25,6 +25,6 @@ func main() {
 
 	err = tokeq.ParseResponseWithDefer(toks, response)
 	if err != nil {
-		fmt.Errorf("tokeq.ParseResponseWithDefer error: %s", err)
+		fmt.Printf("tokeq.ParseResponseWithDefer error: %s", err)
 	}
 }
