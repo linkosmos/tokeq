@@ -5,6 +5,19 @@ Match &amp; Callback iterator for html.Node - aimed for performance &amp; HTML d
 [![GoDoc](http://godoc.org/github.com/linkosmos/tokeq?status.svg)](http://godoc.org/github.com/linkosmos/tokeq)
 [![BSD3License](http://img.shields.io/badge/license-BSD3-blue.svg)](http://opensource.org/licenses/BSD-3-Clause)
 
+## Benchmark
+
+```go
+go test -run=10000 -bench=. -benchmem
+```
+
+Finding html <p> paragraph                 | operations | time / operation | Bytes / operation | allocations / operation
+------------------------------------------ | ---------- | ---------------- | ----------------- | ------------------------
+BenchmarkGoQueryFindP                      |     5000   |   277185 ns/op   |  46059 B/op       |   929 allocs/op
+BenchmarkStandardLibraryTokenFindP         |      500   |  3698731 ns/op   | 291695 B/op       |  9240 allocs/op
+BenchmarkStandardLibraryNodeFindP          |    20000   |    78340 ns/op   |     64 B/op       |     0 allocs/op
+BenchmarkDissectNodesFindP                 |    20000   |    68640 ns/op   |     64 B/op       |     0 allocs/op
+
 ## Installation
 
 ```go
