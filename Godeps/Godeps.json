@@ -1,0 +1,27 @@
+{
+	"ImportPath": "github.com/linkosmos/tokeq",
+	"GoVersion": "go1.4rc2",
+	"Deps": [
+		{
+			"ImportPath": "github.com/PuerkitoBio/goquery",
+			"Comment": "v0.3.2-79-gb444041",
+			"Rev": "b4440419d81240f8451a505b2f806c853bc2befc"
+		},
+		{
+			"ImportPath": "github.com/andybalholm/cascadia",
+			"Rev": "893e27f9a5e7d82a35bfb284307884f5e9f77452"
+		},
+		{
+			"ImportPath": "golang.org/x/net/html",
+			"Rev": "3a29182c25eeabbaaf94daaeecbc7823d86261e7"
+		},
+		{
+			"ImportPath": "golang.org/x/text/encoding",
+			"Rev": "c93e7c9fff19fb9139b5ab04ce041833add0134e"
+		},
+		{
+			"ImportPath": "golang.org/x/text/transform",
+			"Rev": "c93e7c9fff19fb9139b5ab04ce041833add0134e"
+		}
+	]
+}
