@@ -22,8 +22,8 @@ type Tok struct {
 type Toks []Tok
 
 // Add - add new Tok to Toks
-func (toks *Toks) Add(tok Tok) {
-	(*toks) = append((*toks), tok)
+func (toks *Toks) Add(tok ...Tok) {
+	(*toks) = append((*toks), tok...)
 }
 
 // Iterate - iterate through tok's and if there is a match send *token to calback
