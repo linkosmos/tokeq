@@ -31,7 +31,7 @@ func FindNodes(input *html.Node, match Matcher, callback MatcherCallback) {
 
 // ParseResponse - wrapps sequence of URL fate functions
 // user is response to handle: defer response.Body.Close()
-func ParseResponse(toks Toks, response *http.Response) error {
+func ParseResponse(response *http.Response, toks ...Tok) error {
 	contentType := response.Header.Get("Content-Type")
 	if !IsTextHTML(contentType) {
 		return ErrResponseBodyIsNotHTML
@@ -43,11 +43,11 @@ func ParseResponse(toks Toks, response *http.Response) error {
 	if err != nil {
 		return err
 	}
-	return ParseReader(toks, r)
+	return ParseReader(r, toks...)
 }
 
 // ParseResponseWithDefer - same as ParseResponse but with defer response.Body.Close()
-func ParseResponseWithDefer(toks Toks, response *http.Response) error {
+func ParseResponseWithDefer(response *http.Response, toks ...Tok) error {
 	contentType := response.Header.Get("Content-Type")
 	if !IsTextHTML(contentType) {
 		return ErrResponseBodyIsNotHTML
@@ -60,21 +60,21 @@ func ParseResponseWithDefer(toks Toks, response *http.Response) error {
 	if err != nil {
 		return err
 	}
-	return ParseReader(toks, r)
+	return ParseReader(r, toks...)
 }
 
 // ParseReader - parses io.Reader, expected input is HTML page
-func ParseReader(toks Toks, input io.Reader) error {
+func ParseReader(input io.Reader, toks ...Tok) error {
 	document, err := html.Parse(input)
 	if err != nil {
 		return err
 	}
-	DissectNodes(toks, document)
+	DissectNodes(document, toks...)
 	return nil
 }
 
 // DissectNodes - range toks through recursively through FindNodes
-func DissectNodes(toks Toks, input *html.Node) {
+func DissectNodes(input *html.Node, toks ...Tok) {
 	for _, tok := range toks {
 		FindNodes(input, tok.Match, tok.Callback)
 	}
