@@ -49,16 +49,13 @@ func main() {
 		fmt.Printf("http.Get error: %s", err)
 		return
 	}
-	toks := tokeq.Toks{
-		tokeq.Tok{
-			Match: tokeq.MatchP,
-			Callback: func(n *html.Node) {
-				fmt.Println(tokeq.FindText(n))
-			},
-		},
-	}
 
-	err = tokeq.ParseResponseWithDefer(toks, response)
+	err = tokeq.ParseResponseWithDefer(response, tokeq.Tok{
+		Match: tokeq.MatchP,
+		Callback: func(n *html.Node) {
+			fmt.Println(tokeq.FindText(n))
+		},
+	})
 	if err != nil {
 		fmt.Printf("tokeq.ParseResponseWithDefer error: %s", err)
 	}
