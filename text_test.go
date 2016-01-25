@@ -4,6 +4,8 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 )
@@ -24,10 +26,12 @@ var findTextTests = []struct {
 	html     string
 	expected string
 }{
-	{`<h1 class="details-list__item-title" itemprop="name">Emm <em>Again</em> Blue text span <span>Arti</span></h1>`, "Emm  Blue text span "},
+	{`<h1 class="details-list__item-title" itemprop="name">Emm <em>Again</em> Blue text span <span>Arti</span></h1>`, "Emm Blue text span"},
 	{`<h1 class="details-list__item-title" itemprop="name">Blue text span<span>Arti</span></h1>`, "Blue text span"},
-	{`<h1 class="details-list__item-title" itemprop="name"><em>Again</em> Blue text span <span>Arti</span></h1>`, " Blue text span "},
+	{`<h1 class="details-list__item-title" itemprop="name"><em>Again</em> Blue text span <span>Arti</span></h1>`, "Blue text span"},
 	{`<h1>Blue text span</h1>`, "Blue text span"},
+	{"<h1>\tBlue text span</h1>", "Blue text span"},
+	{"<h1>\t\n\t\tBlue text span</h1>", "Blue text span"},
 }
 
 func TestFindText(t *testing.T) {
@@ -35,7 +39,7 @@ func TestFindText(t *testing.T) {
 		n := ToNode(test.html)
 		got := FindText(n)
 		if got != test.expected {
-			t.Errorf("Expected %s, got %s", test.expected, got)
+			assert.Equal(t, test.expected, got)
 		}
 	}
 }
@@ -55,7 +59,7 @@ func TestDeepFindText(t *testing.T) {
 		n := ToNode(test.html)
 		got := FindDeepText(n)
 		if got != test.expected {
-			t.Errorf("Expected %s, got %s", test.expected, got)
+			assert.Equal(t, test.expected, got)
 		}
 	}
 }
