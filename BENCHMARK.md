@@ -13,3 +13,11 @@ BenchmarkStandardLibraryTokenFindP-8              500    2657110 ns/op    340032
 BenchmarkStandardLibraryNodeFindP-8             30000      59291 ns/op        44 B/op        0 allocs/op
 BenchmarkDissectNodesFindP-8                    30000      56398 ns/op        44 B/op        0 allocs/op
 ok    github.com/linkosmos/tokeq  7.356s
+
+Fri Jan 29 19:03:35 EET 2016 (go1.6rc1)
+PASS
+BenchmarkGoQueryFindP-8                          5000     212107 ns/op     46062 B/op      928 allocs/op
+BenchmarkStandardLibraryTokenFindP-8              500    2574948 ns/op    290719 B/op     8971 allocs/op
+BenchmarkStandardLibraryNodeFindP-8             30000      56711 ns/op        43 B/op        0 allocs/op
+BenchmarkDissectNodesFindP-8                    30000      53779 ns/op        43 B/op        0 allocs/op
+ok    github.com/linkosmos/tokeq  7.119s
